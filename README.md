@@ -41,7 +41,7 @@ UsersApi_2/
 
 ---
 
-## ⚙️ Backend (ASP.NET Core)
+## Backend (ASP.NET Core)
 ### Recursos principais
 - JWT + Refresh Token
 - Roles: `ADMIN`, `MANAGER`, `USER`
