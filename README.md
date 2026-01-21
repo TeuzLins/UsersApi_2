@@ -2,7 +2,7 @@
 
 Projeto FULL-STACK com ASP.NET Core (.NET 8) + React/Vite + SQL Server.
 
-## ✅ Requisitos
+## Requisitos
 - .NET SDK 8
 - Node.js 18+
 - Docker (opcional)
