@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: usersapi-sqlserver
+    environment:
+      SA_PASSWORD: "Your_password123"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserver_data:/var/opt/mssql
+
+  api:
+    build:
+      context: ./backend/UsersApi.Api
+    container_name: usersapi-api
+    environment:
+      ASPNETCORE_URLS: "http://0.0.0.0:5000"
+      ConnectionStrings__DefaultConnection: "Server=sqlserver,1433;Database=UsersApiDb;User Id=sa;Password=Your_password123;TrustServerCertificate=True;"
+      Jwt__Issuer: "UsersApi"
+      Jwt__Audience: "UsersApi"
+      Jwt__Key: "CHANGE_ME_SUPER_SECRET_KEY_1234567890"
+      Jwt__AccessTokenMinutes: "15"
+      Jwt__RefreshTokenDays: "7"
+    ports:
+      - "5000:5000"
+    depends_on:
+      - sqlserver
+
+  front:
+    build:
+      context: ./frontend
+    container_name: usersapi-front
+    environment:
+      VITE_API_URL: "http://localhost:5000/api"
+    ports:
+      - "5173:5173"
+    depends_on:
+      - api
+
+volumes:
+  sqlserver_data:
