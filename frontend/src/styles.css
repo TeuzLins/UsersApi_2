@@ -111,3 +111,15 @@ select {
   align-items: center;
   margin-top: 16px;
 }
+
+.error {
+  color: #dc2626;
+}
+
+.success {
+  color: #16a34a;
+}
+
+.details p {
+  margin: 8px 0;
+}
